@@ -1,0 +1,48 @@
+/*
+** main.c for  in /home/naniev
+** 
+** Made by LEGOUEST Clement
+** Login   <legoue_c@etna-alternance.net>
+** 
+** Started on  Wed Nov  8 09:58:30 2017 LEGOUEST Clement
+** Last update Wed Nov  8 19:33:21 2017 LEGOUEST Clement
+*/
+
+#include <libmy.h>
+#include "ftl.h"
+#include "air_shed.h"
+#include <stdio.h>
+#include "my_string.h"
+#include "game_turns.h"
+
+int	main(void)
+{
+  int	*foe_nb;
+
+  my_putstr_color("clear", "Suite a un violent affrontement contre une flotte rebelle,\n");
+  my_putstr("votre unite s'abime sur une petite planete couverte de foret.\n");
+  my_putstr("La flotte rebelle ne va pas tarder a debarquer, heureusement,\n");
+  my_putstr("vous avez des competences de construction ainsi que des pieces\n");
+  my_putstr("a disposition. Vous vous lancez dans la construction improvisee\n");
+  my_putstr("d'un petit vaisseau de fortune\n");
+  readline();
+  t_ship	*ship;
+  ship = create_ship();
+  readline();
+  add_weapon_to_ship(ship);
+  readline();
+  add_ftl_drive_to_ship(ship);
+  readline();
+  add_navigation_tools_to_ship(ship);
+  readline();
+  my_putstr("Votre vaisseau termine, vous vous apretez a decoller.\n");
+  my_putstr("Vous apercevez alors un petit transporteur rebelle, il est sans escorte.\n");
+  my_putstr("Son containeur vous sera surement utile, vous decidez de l'attaquer\n");
+  my_putstr("afin de l'en depouiller\n");
+  while (ship->hull != 0)
+    {
+      my_putstr("Choisissez une option de jeu :\n");
+      game_turns(ship);
+    }
+  return(0);
+}

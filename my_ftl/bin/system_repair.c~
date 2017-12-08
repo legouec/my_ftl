@@ -1,0 +1,75 @@
+/*
+** system_repair.c for  in /home/naniev/ETNA/FDI-DEVC/my_ftl/legoue_c
+** 
+** Made by LEGOUEST Clement
+** Login   <legoue_c@etna-alternance.net>
+** 
+** Started on  Tue Nov  7 18:22:13 2017 LEGOUEST Clement
+** Last update Wed Nov  8 09:49:27 2017 LEGOUEST Clement
+*/
+static const t_repair_command	REPAIR_COMMAND[] = {
+  {"ftl_drive", &ftl_drive_system_repair},
+  {"navigation_tools.", navaigation_tools_system_repair},
+  {"weapon.", weapon_system_repair},
+  {NULL, NULL}};
+
+void	ftl_drive_system_repair(t_ship *ship)
+{
+  my_putstr("Reparation du reacteur en cours...\n");
+  free(ship->ftl_drive->system_state);
+  ship->ftl_drive->system_state = my_strdup("online");
+  if (ship->ftl_drive->system_state == NULL)
+    {
+      my_putstr("Les reparations du reacteur ont echoue.\n");
+      return(0);
+    }
+  my_putstr("Reparations terminees! Systeme reacteur OK!\n");
+  return(1);
+}
+
+void	navigation_tools_system_repair(t_ship *ship)
+{
+  my_putstr("Reparation du systeme de navigation en cours...\n");
+  free(ship->navigation_tools->system_state);
+  ship->navigation_tools->system_state = my_strdup("online");
+  if (ship->navigation_tools->system_state == NULL)
+    {
+      my_putstr("Les reparation du systeme de navigation ont echoue.\n");
+      return(0);
+    }
+  my_putstr("Reparations terminees! Systeme de navigation OK!");
+  return(1);
+}
+
+void	weapon_system_repair(t_ship *ship)
+{
+  my_putstr("Reparation du systeme d'armement en cours...\n");
+  free(ship->weapon->system_state);
+  ship->weapon->system_state = my_strdup("online");
+  if (ship->weapon->system_state == NULL)
+    {
+      my_putstr("Les reparations du systeme d'armement ont echoue.\n");
+      return(0);
+    }
+  my_putstr("Reparations terminees! Systeme d'armement OK!\n");
+  return(1);
+}
+
+void	system_repair(t_ship *ship)
+{
+  char	*cmd;
+  int	idx;
+
+  idx = 0;
+  idy = 0;
+  my_putstr("repair_system~>");
+  cmd = realine();
+  while (REPAIR_COMMAND[idx].repair_command != NULL)
+    {
+      if (my_strcmp(cmd, REPAIR_COMMAND[idx].repair_command)
+	{
+	  REPAIR_COMMAND[idx].function_pointer(ship);
+	}
+	idx ++;
+	}
+    }

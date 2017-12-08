@@ -1,0 +1,88 @@
+/*
+** air_shed.c for  in /home/naniev
+** 
+** Made by LEGOUEST Clement
+** Login   <legoue_c@etna-alternance.net>
+** 
+** Started on  Mon Nov  6 10:57:11 2017 LEGOUEST Clement
+** Last update Mon Nov  6 20:57:41 2017 LEGOUEST Clement
+*/
+#include "ftl.h"
+#include <libmy.h>
+
+t_ship		*create_ship(void);
+{
+  t_ship	*ship;
+
+  my_putstr("Construction du vaisseau en cours...\n");
+  ship = malloc(sizeof(t_ship));
+  if (ship == NULL)
+    {
+      my_putstr("Le vaisseau n'a pas pu etre construit");
+      my_putstr("par manque de materiaux.\n");
+      return(NULL);
+    }
+  my_putstr("Amelioration du vaisseau teminee!\n");
+  ship->hull = 50;
+  ship->weapon = NULL;
+  ship->ftl_drive = NULL;
+  ship->navigation_tools = NULL;
+  return(ship);
+}
+
+int		add_weapon_to_ship(t_ship *ship)
+{
+  t_weapon	*weapon;
+  
+  my_putstr("Ajout des armes en cours...\n");
+  weapon = malloc(sizeof(t_weapon));
+  if (weapon == NULL)
+    {
+      my_putstr("Votre vaisseau a explose quand vous avez");
+      my_putstr("tente d'ajouter les armes.\n");
+      return(0);
+    }
+  my_putstr("Les armes ont ete ajoutees avec succes!\n");
+  weapon->damage = 10;
+  weapon->system_state = my_strdup("online");
+  ship->weapon = weapon;
+  return(1);
+}
+
+int		add_ftl_drive_to_ship(t_ship *ship)
+{
+  t_ftl_drive	*ftl_drive;
+  
+  my_putstr("Ajout du réacteur en cours...\n");
+  ftl_drive = malloc(sizeof(t_ftl_drive));
+  if (ftl_drive == NULL)
+    {
+      my_putstr("Votre vaisseau a explose lorsque vous avez");
+      my_putstr("pose le reacteur.\n");
+      return(0);
+    }
+  my_putstr("Le reacteur a ete ajoute avec succes!\n");
+  ftl_drive->energy = 10;
+  ftl_drive->system_state = my_strdup("online");
+  ship->ftl_drive = ftl_drive;
+  return(1);
+}
+
+int		add_navigation_tools_to_ship(t_ship *ship)
+{
+  t_navigation_tools	*navigation_tools;
+
+  my_putstr("Ajout des outils de navigation...\n");
+  navigation_tools = malloc(sizeof(t_navigation_tools));
+  if (navigation_tools == NULL)
+    {
+      my_putstr("Votre vaisseau a explose lorsque vous avez");
+      my_putstr("pose les outils de navgation.\n");
+      return(0);
+    }
+  my_putstr("Les outils de navigation ont ete ajoutes avec succes!\n");
+  navigation_tools->sector = 0;
+  navigation_tools->evade = 25;
+  navigation_tools->system_state = my_strdup("online");
+  ship->navigation_tools = navigation_tools;
+}
